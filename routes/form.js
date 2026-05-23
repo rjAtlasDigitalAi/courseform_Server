@@ -46,9 +46,14 @@ router.post('/register', async (req, res) => {
 📚 *Course Details:* ${courseDetail}
 
 _Submitted on: ${new Date().toLocaleString('en-IN', {
-    timeZone: 'Asia/Kolkata',
-  })}_
-  `.trim();
+  timeZone: 'Asia/Kolkata',
+  hour: '2-digit',
+  minute: '2-digit',
+  day: 'numeric',
+  month: 'numeric',
+  year: 'numeric',
+})}_
+`.trim();
 
   try {
     // Send WhatsApp notification
