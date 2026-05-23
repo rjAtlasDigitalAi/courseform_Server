@@ -5,9 +5,12 @@ const router = express.Router();
 // Waichat credentials
 const INSTANCE_ID = "68E0E2878A990";
 const ACCESS_TOKEN = "68de6bd371bd8";
-const RECEIVER_NUMBER = "919074827805"; // WhatsApp number to receive notification
-// "919526224999"
- const {
+const RECEIVER_NUMBER = "919074827805";
+
+// Register Route
+router.post('/register', async (req, res) => {
+
+  const {
     name,
     phone,
     age,
@@ -42,12 +45,13 @@ const RECEIVER_NUMBER = "919074827805"; // WhatsApp number to receive notificati
 🕐 *Slot:* ${slot}
 📚 *Course Details:* ${courseDetail}
 
-
-_Submitted on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}_
+_Submitted on: ${new Date().toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+  })}_
   `.trim();
 
   try {
-    // Send WhatsApp notification via Waichat API
+    // Send WhatsApp notification
     await axios.post('https://waichat.com/api/send', {
       number: RECEIVER_NUMBER,
       type: 'text',
@@ -57,12 +61,20 @@ _Submitted on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }
     });
 
     console.log(`✅ WhatsApp notification sent to ${RECEIVER_NUMBER}`);
-    return res.status(200).json({ success: true, message: 'Registration successful!' });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Registration successful!',
+    });
 
   } catch (err) {
     console.error('❌ WhatsApp send failed:', err.message);
-    // Still return success to user even if WA notification fails
-    return res.status(200).json({ success: true, message: 'Registration saved. Notification pending.' });
+
+    // Still return success
+    return res.status(200).json({
+      success: true,
+      message: 'Registration saved. Notification pending.',
+    });
   }
 });
 
