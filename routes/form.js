@@ -5,8 +5,8 @@ const router = express.Router();
 // Waichat credentials
 const INSTANCE_ID = "68E0E2878A990";
 const ACCESS_TOKEN = "68de6bd371bd8";
-const RECEIVER_NUMBER = "919526224999"; // WhatsApp number to receive notification
-
+const RECEIVER_NUMBER = "919074827805"; // WhatsApp number to receive notification
+// "919526224999"
 router.post('/register', async (req, res) => {
   const { name, email, phone, slot, courseDetail } = req.body;
 
