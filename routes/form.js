@@ -7,23 +7,41 @@ const INSTANCE_ID = "68E0E2878A990";
 const ACCESS_TOKEN = "68de6bd371bd8";
 const RECEIVER_NUMBER = "919074827805"; // WhatsApp number to receive notification
 // "919526224999"
-router.post('/register', async (req, res) => {
-  const { name, email, phone, slot, courseDetail } = req.body;
+ const {
+    name,
+    phone,
+    age,
+    studentClass,
+    slot,
+    courseDetail,
+  } = req.body;
 
   // Validate all fields
-  if (!name || !email || !phone || !slot || !courseDetail) {
-    return res.status(400).json({ success: false, message: 'All fields are required.' });
+  if (
+    !name ||
+    !phone ||
+    !age ||
+    !studentClass ||
+    !slot ||
+    !courseDetail
+  ) {
+    return res.status(400).json({
+      success: false,
+      message: 'All fields are required.',
+    });
   }
 
   // Build WhatsApp message
   const message = `
 🎓 *New Registration Alert!*
 
-👤 *Name:* ${name}
-📧 *Email:* ${email}
+👤 *Student Name:* ${name}
 📱 *Phone:* ${phone}
+🎂 *Age:* ${age}
+🏫 *Class:* ${studentClass}
 🕐 *Slot:* ${slot}
 📚 *Course Details:* ${courseDetail}
+
 
 _Submitted on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}_
   `.trim();
